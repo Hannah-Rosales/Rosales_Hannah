@@ -1,10 +1,10 @@
-# Function to compute final grade
+# Compute final grade
 def compute_final_grade(midterm, minor_b, final_exam):
     # Calculate final grade
     final_grade = (0.30 * midterm) + (0.10 * minor_b) + (0.60 * final_exam)
     return final_grade
 
-# Function to determine equivalent grade
+# Determine the final grade based on the grading remarks
 def determine_equivalent_grade(final_grade):
     if 98 <= final_grade <= 100:
         return 4.00
@@ -35,21 +35,17 @@ def determine_equivalent_grade(final_grade):
     else:
         return 0.00
 
-# Main program
+
 def main():
-    # Input student's name and grades
     student_name = input("Enter student's name: ")
     midterm_grade = float(input("Enter midterm grade: "))
     minor_b_grade = float(input("Enter minor B grade: "))
     final_exam_grade = float(input("Enter final exam grade: "))
 
-    # Compute final grade
     final_grade = compute_final_grade(midterm_grade, minor_b_grade, final_exam_grade)
-
-    # Determine equivalent grade
     equivalent_grade = determine_equivalent_grade(final_grade)
 
-    # Output the results
+# Display
     print("\n--- Student Grade Report ---")
     print(f"Student Name: {student_name}")
     print(f"Midterm Grade: {midterm_grade}")
@@ -58,6 +54,6 @@ def main():
     print(f"Final Grade: {final_grade:.2f}")
     print(f"Equivalent Grade: {equivalent_grade:.2f}")
 
-# Run the main program
+
 if __name__ == "__main__":
     main()
