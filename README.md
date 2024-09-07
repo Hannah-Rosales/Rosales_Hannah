@@ -1,63 +1,58 @@
-# Function to compute final grade
-def compute_final_grade(midterm, minor_b, final_exam):
-    # Calculate final grade
-    final_grade = (0.30 * midterm) + (0.10 * minor_b) + (0.60 * final_exam)
-    return final_grade
+# Function to compute gross income
+def compute_gross_income(hours_per_day, days_per_week, weeks_per_month):
+    gross_income = hours_per_day * days_per_week * weeks_per_month
+    return gross_income
 
-# Function to determine equivalent grade
-def determine_equivalent_grade(final_grade):
-    if 98 <= final_grade <= 100:
-        return 4.00
-    elif 95 <= final_grade <= 97.99:
-        return 3.75
-    elif 92 <= final_grade <= 94.99:
-        return 3.50
-    elif 89 <= final_grade <= 91.99:
-        return 3.25
-    elif 86 <= final_grade <= 88.99:
-        return 3.00
-    elif 83 <= final_grade <= 85.99:
-        return 2.75
-    elif 80 <= final_grade <= 82.99:
-        return 2.50
-    elif 77 <= final_grade <= 79.99:
-        return 2.25
-    elif 74 <= final_grade <= 76.99:
-        return 2.00
-    elif 71 <= final_grade <= 73.99:
-        return 1.75
-    elif 68 <= final_grade <= 70.99:
-        return 1.50
-    elif 64 <= final_grade <= 67.99:
-        return 1.25
-    elif 60 <= final_grade <= 63.99:
-        return 1.00
-    else:
-        return 0.00
+# Function to compute deductions based on gross income
+def compute_deductions(gross_income):
+    pagibig_contribution = 100.00  # Pag-ibig is a fixed contribution
+    
+    # Determine SSS and PhilHealth contributions based on gross income ranges
+    if gross_income <= 20000:
+        sss_contribution = 100.00
+        philhealth_contribution = 125.75
+    elif 20001 <= gross_income <= 50000:
+        sss_contribution = 1200.00
+        philhealth_contribution = 2200.50
+    elif 50001 <= gross_income <= 75000:
+        sss_contribution = 6800.00
+        philhealth_contribution = 4800.00
+    else:  # Gross income > 75000
+        sss_contribution = 8800.00
+        philhealth_contribution = 5800.00
+    
+    # Calculate total deduction
+    total_deduction = sss_contribution + pagibig_contribution + philhealth_contribution
+    return total_deduction
 
-# Main program
+# Main function to run the payroll computation
 def main():
-    # Input student's name and grades
-    student_name = input("Enter student's name: ")
-    midterm_grade = float(input("Enter midterm grade: "))
-    minor_b_grade = float(input("Enter minor B grade: "))
-    final_exam_grade = float(input("Enter final exam grade: "))
+    # Input employee details
+    employee_name = input("Enter employee's name: ")
+    department = input("Enter employee's department: ")
+    
+    # Input working hours and rates
+    hours_per_day = float(input("Enter number of working hours per day: "))
+    days_per_week = int(input("Enter number of working days per week: "))
+    weeks_per_month = int(input("Enter number of working weeks per month: "))
+    
+    # Compute gross income
+    gross_income = compute_gross_income(hours_per_day, days_per_week, weeks_per_month)
+    
+    # Compute total deduction
+    total_deduction = compute_deductions(gross_income)
+    
+    # Compute net income
+    net_income = gross_income - total_deduction
+    
+    # Output the payroll details
+    print("\n--- Employee Payroll Information ---")
+    print(f"Employee Name: {employee_name}")
+    print(f"Department: {department}")
+    print(f"Gross Income: {gross_income:.2f}")
+    print(f"Total Deduction: {total_deduction:.2f}")
+    print(f"Net Income: {net_income:.2f}")
 
-    # Compute final grade
-    final_grade = compute_final_grade(midterm_grade, minor_b_grade, final_exam_grade)
-
-    # Determine equivalent grade
-    equivalent_grade = determine_equivalent_grade(final_grade)
-
-    # Output the results
-    print("\n--- Student Grade Report ---")
-    print(f"Student Name: {student_name}")
-    print(f"Midterm Grade: {midterm_grade}")
-    print(f"Minor B Grade: {minor_b_grade}")
-    print(f"Final Exam Grade: {final_exam_grade}")
-    print(f"Final Grade: {final_grade:.2f}")
-    print(f"Equivalent Grade: {equivalent_grade:.2f}")
-
-# Run the main program
+# Run the program
 if __name__ == "__main__":
     main()
